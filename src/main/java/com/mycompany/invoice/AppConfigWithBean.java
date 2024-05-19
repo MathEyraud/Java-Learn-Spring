@@ -12,27 +12,27 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
-@Configuration
+//@Configuration
 // Plus besoin de @ComponentScan avec l'injection par méthode
 /*@ComponentScan(basePackages = {
         "com.mycompany.invoice.controller.cmd",
         "com.mycompany.invoice.service.prefix",
         "com.mycompany.invoice.repository.db"
 })*/
-@ImportResource("classpath:applicationContextProperties.xml")
+//@ImportResource("classpath:applicationContextProperties.xml")
 public class AppConfigWithBean {
 
-    @Bean
+    //@Bean
     public IInvoiceController configInvoiceController(){
         return new InvoiceControllerCMD();
     }
 
-    @Bean
+    //@Bean
     public IInvoiceService configInvoiceService(){
         return new InvoiceServicePrefix();
     }
 
-    @Bean
+    //@Bean
     public IInvoiceRepository configInvoiceRepository(){
         return new InvoiceRepositoryDB();
     }

@@ -21,7 +21,7 @@ public class InvoiceControllerFrontend implements IInvoiceController {
     public void createInvoice(){
 
         // On imagine que le nom a été rempli dans un formulaire en front
-        String customerName = "Math";
+        String customerName = "Math By Controller FrontEnd";
 
         Invoice newInvoice = new Invoice();
         newInvoice.setCustomerName(customerName);

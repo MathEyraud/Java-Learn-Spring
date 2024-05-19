@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
-@Controller
+//@Controller
 public class InvoiceControllerCMD implements IInvoiceController {
 
     /**

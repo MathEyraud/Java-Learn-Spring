@@ -10,17 +10,15 @@ import com.mycompany.invoice.repository.db.InvoiceRepositoryDB;
 import com.mycompany.invoice.service.IInvoiceService;
 import com.mycompany.invoice.service.number.InvoiceServiceNumber;
 import com.mycompany.invoice.service.prefixinv.InvoiceServicePrefixINV;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
@@ -72,7 +70,12 @@ public class App
          * Avec injection de méthode
          * Tout est paramétré dans main/java/com/mycompany/invoice/AppConfigWithBean
          */
-        methodIoCWithoutApplicationContextXmlWithBean();
+        //methodIoCWithoutApplicationContextXmlWithBean();
+
+        /**
+         * Méthode Spring Boot
+         */
+        methodSpringBoot(args);
 
     }
 
@@ -232,8 +235,20 @@ public class App
     public static void methodIoCWithoutApplicationContextXmlWithBean(){
 
         // Création du contexte Spring en chargeant le fichier de configuration
-        // Qui est la class AppConfigWithoutBean et non un fchier .xml
+        // Qui est la class AppConfigWithBean et non un fchier .xml
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfigWithBean.class);
+
+        // Utilisation du contexte pour récupérer un bean
+        IInvoiceController invoiceController = context.getBean(IInvoiceController.class);
+
+        // Utiliser l'objet client comme nécessaire
+        invoiceController.createInvoice();
+    }
+    public static void methodSpringBoot(String[] args){
+
+        // Création du contexte Spring en chargeant le fichier de configuration
+        // Qui est la class AppConfigWithoutBean et non un fchier .xml
+        ApplicationContext context = SpringApplication.run(AppConfigSpringBoot.class,args);
 
         // Utilisation du contexte pour récupérer un bean
         IInvoiceController invoiceController = context.getBean(IInvoiceController.class);
