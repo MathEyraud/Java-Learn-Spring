@@ -6,7 +6,9 @@ import com.mycompany.invoice.service.IInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+//@Service
 public class InvoiceServicePrefixINV implements IInvoiceService {
 
     /**
@@ -20,10 +22,17 @@ public class InvoiceServicePrefixINV implements IInvoiceService {
     /**
      * METHODS
      */
+    @Override
     public void create(Invoice invoice){
         invoice.setNumber(String.valueOf("INV_" + ++this.lastNumber));
         invoiceRepository.create(invoice);
     }
+
+    @Override
+    public List<Invoice> getListInvoice(){
+        return invoiceRepository.getListInvoice();
+    }
+
     /**
      * GETTERS/SETTERS
      */

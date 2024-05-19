@@ -4,11 +4,13 @@ import com.mycompany.invoice.controller.IInvoiceController;
 import com.mycompany.invoice.entity.Invoice;
 import com.mycompany.invoice.service.IInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Scanner;
 
-@Controller
+//@Controller
 public class InvoiceControllerCMD implements IInvoiceController {
 
     /**
@@ -20,6 +22,7 @@ public class InvoiceControllerCMD implements IInvoiceController {
     /**
      * METHODS
      */
+    @Override
     public void createInvoice(){
         System.out.println( "What is the customer name ?" );
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +33,20 @@ public class InvoiceControllerCMD implements IInvoiceController {
         newInvoice.setCustomerName(customerName);
 
         invoiceService.create(newInvoice);
+    }
+
+    /* PAS FORCEMENT LA MEILLEUR MANIERE QUAND ON RETOURNE QU'UNE SEULE VALEUR */
+    @RequestMapping("/invoice-list-invoice")
+    public String displayListInvoice(Model model){
+        System.out.println(" ----- displayListInvoice ----- ");
+
+        // Récupérer les données depuis le service
+        List<Invoice> listInvoice = invoiceService.getListInvoice();
+
+        // Envoyer les données vers le fichier html
+        model.addAttribute("invoices",listInvoice);
+
+        return "list-invoice";
     }
 
     /**
